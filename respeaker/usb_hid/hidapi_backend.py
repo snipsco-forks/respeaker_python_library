@@ -63,7 +63,7 @@ class HidApiUSB(Interface):
 
         for deviceInfo in devices:
             product_name = deviceInfo['product_string']
-            if (product_name.find("MicArray") < 0):
+            if (product_name.find("ReSpeaker") < 0):
                 # Skip non cmsis-dap devices
                 continue
 
@@ -101,7 +101,7 @@ class HidApiUSB(Interface):
         """
         for _ in range(64 - len(data)):
             data.append(0)
-        #logging.debug("send: %s", data)
+        logging.debug("send: %s", data) 
         self.device.write([0] + data)
         return
 
