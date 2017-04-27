@@ -77,8 +77,11 @@ class PyUSB(Interface):
             return []
 
         boards = []
-        for board in all_devices:
-            print board
+       # for board in all_devices:
+       #     if board.idVendor == 10374:
+       #         print "Truez"
+       # print "z"
+
         # iterate on all devices found
         for board in all_devices:
             interface_number = -1
@@ -86,21 +89,22 @@ class PyUSB(Interface):
                 # The product string is read over USB when accessed.
                 # This can cause an exception to be thrown if the device
                 # is malfunctioning.
-                product = board.product
+                product = board.iProduct
+                print "product: %s" % product
             except usb.core.USBError as error:
                 logging.warning("Exception getting product string: %s", error)
                 continue
-            if (product is None) or (product.find("MicArray") < 0) or (product.find("ReSpeaker") < 0):
+            if (product is None) or (board.idVendor != 10374):
                 # Not a ReSpeaker MicArray device so close it
                 usb.util.dispose_resources(board)
                 continue
-
             # get active config
             config = board.get_active_configuration()
 
             # iterate on all interfaces:
             #    - if we found a HID interface
             for interface in config:
+                print interface.bInterfaceClass
                 if interface.bInterfaceClass == 0x03:
                     interface_number = interface.bInterfaceNumber
                     break
