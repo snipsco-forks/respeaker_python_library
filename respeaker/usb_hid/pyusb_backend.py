@@ -77,7 +77,8 @@ class PyUSB(Interface):
             return []
 
         boards = []
-
+        for board in all_devices:
+            print board
         # iterate on all devices found
         for board in all_devices:
             interface_number = -1
@@ -89,7 +90,7 @@ class PyUSB(Interface):
             except usb.core.USBError as error:
                 logging.warning("Exception getting product string: %s", error)
                 continue
-            if (product is None) or (product.find("MicArray") < 0):
+            if (product is None) or (product.find("MicArray") < 0) or (product.find("ReSpeaker") < 0):
                 # Not a ReSpeaker MicArray device so close it
                 usb.util.dispose_resources(board)
                 continue

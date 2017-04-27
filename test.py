@@ -4,7 +4,6 @@ import respeaker.usb_hid as usb_hid
 class MicArray:
     def __init__(self):
         self.hid = usb_hid.get()
-        #print("usb_hid: %s", self.hid)
 
     def write(self, address, data):
         data = self.to_bytearray(data)
@@ -47,7 +46,8 @@ def main():
     mic = MicArray()
 
     print("Using: %s (hidapiusb)" % usb_hid.usb_backend)
-    #print("mic: %s", mic)
+    print("mic: %s" % mic)
+    
     if len(sys.argv) < 3:
         print('Usage: python {} w 0x0 0x000003'.format(sys.argv[0]))
         sys.exit(1)

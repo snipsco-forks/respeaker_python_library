@@ -54,6 +54,7 @@ class HidApiUSB(Interface):
         """
 
         devices = hid.enumerate()
+        
 
         if not devices:
             logging.debug("No Mbed device connected")
@@ -62,8 +63,10 @@ class HidApiUSB(Interface):
         boards = []
 
         for deviceInfo in devices:
+            print deviceInfo
+            
             product_name = deviceInfo['product_string']
-            if (product_name.find("ReSpeaker") < 0):
+            if (product_name.find("ReSpeaker") < 0) or (product_name.find("MicArray") < 0):
                 # Skip non cmsis-dap devices
                 continue
 
