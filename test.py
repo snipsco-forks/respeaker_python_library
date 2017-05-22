@@ -46,7 +46,6 @@ def main():
     mic = MicArray()
 
     print("Using: %s (hidapiusb)" % usb_hid.usb_backend)
-    print("mic: %s" % mic)
     
     if len(sys.argv) < 3:
         print('Usage: python {} w 0x0 0x000003'.format(sys.argv[0]))
