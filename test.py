@@ -70,7 +70,7 @@ def main():
 
             mic.write(address, data)
         else:
-            print [int(x) for x in mic.read(address, 4)]
+            print([int(x) for x in mic.read(address, 4)])
     except Exception as e:
         print(e.message)
 

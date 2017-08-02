@@ -90,7 +90,6 @@ class PyUSB(Interface):
                 # This can cause an exception to be thrown if the device
                 # is malfunctioning.
                 product = board.iProduct
-                print "product: %s" % product
             except usb.core.USBError as error:
                 logging.warning("Exception getting product string: %s", error)
                 continue
@@ -104,7 +103,7 @@ class PyUSB(Interface):
             # iterate on all interfaces:
             #    - if we found a HID interface
             for interface in config:
-                print interface.bInterfaceClass
+                print(str(interface.bInterfaceClass))
                 if interface.bInterfaceClass == 0x03:
                     interface_number = interface.bInterfaceNumber
                     break
