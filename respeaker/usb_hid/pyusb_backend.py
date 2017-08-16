@@ -103,7 +103,7 @@ class PyUSB(Interface):
             # iterate on all interfaces:
             #    - if we found a HID interface
             for interface in config:
-                print(str(interface.bInterfaceClass))
+                #print(str(interface.bInterfaceClass))
                 if interface.bInterfaceClass == 0x03:
                     interface_number = interface.bInterfaceNumber
                     break
@@ -115,7 +115,8 @@ class PyUSB(Interface):
                 if board.is_kernel_driver_active(interface_number):
                     board.detach_kernel_driver(interface_number)
             except Exception as e:
-                print(e)
+                pass
+                #print(e)
 
             ep_in, ep_out = None, None
             for ep in interface:
